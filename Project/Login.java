@@ -1,101 +1,77 @@
 package Project;
 
-import java.awt.event.*;
-import java.awt.*;
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-/***
- * Gym Booking System Mini-Project
- * Created on 15/11/2021
- * @author Steven Oprisan
- * @version 1.0
- */
+public class Login implements ActionListener {
 
-/*** Global object references created ***/
-public class Login  {
-    JTextField usernameField;
-    JPasswordField passwordField;
-
-    public Login() {
-        JFrame jFrameWindow = new JFrame("Gym Login Page");
-
-        FlowLayout flowLayout = new FlowLayout();
-
-        jFrameWindow.setLayout(flowLayout);
-
-        jFrameWindow.setSize(500, 150);
-
-        jFrameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        JLabel usernameLabel = new JLabel("Username: ");
-
-        jFrameWindow.add(usernameLabel);
-
-        usernameField = new JTextField(10);
-
-        jFrameWindow.add(usernameField);
-
-        JLabel passwordLabel = new JLabel("Password: ");
-
-        jFrameWindow.add(passwordLabel);
-
-        passwordField = new JPasswordField(10);
-
-        jFrameWindow.add(passwordField);
-
-        TextFieldEventHandler handler = new TextFieldEventHandler();
-
-        /*** ActionListener is assigned to each field ***/
-        usernameField.addActionListener(handler);
-        passwordField.addActionListener(handler);
-
-        jFrameWindow.setVisible(true);
-    }
+    private static JLabel usernameLabel;
+    private static JTextField usernameText;
+    private static JLabel passwordLabel;
+    private static JPasswordField passwordText;
+    private static JButton button;
+    private static JLabel loggedIn;
 
     public static void main(String[] args) {
-        Login guiApp = new Login();
+
+        /**
+         * Adding JPanel, displaying the window
+         */
+        JPanel panel = new JPanel();
+
+        JFrame frame = new JFrame();
+        frame.add(panel);
+        frame.setTitle("Login Page");
+        frame.setLocation(800,300);
+        frame.setSize(400,250);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        panel.setLayout(null);
+
+        usernameLabel = new JLabel("Username");
+        usernameLabel.setBounds(50,30,80,30);
+        panel.add(usernameLabel);
+
+        usernameText = new JTextField(20);
+        usernameText.setBounds(150,30,180,30);
+        panel.add(usernameText);
+
+        passwordLabel = new JLabel("Password");
+        passwordLabel.setBounds(50,80,80,30);
+        panel.add(passwordLabel);
+
+        passwordText = new JPasswordField();
+        passwordText.setBounds(150,80,180,30);
+        panel.add(passwordText);
+
+        button = new JButton("Login");
+        button.setBounds(50,130,80,30);
+        button.addActionListener(new Login());
+        panel.add(button);
+
+        loggedIn = new JLabel("");
+        loggedIn.setBounds(10,180,250,30);
+        panel.add(loggedIn);
+
+        frame.setVisible(true);
     }
 
-    private class TextFieldEventHandler implements ActionListener {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String user = usernameText.getText();
+        String password = passwordText.getText();
 
-        @Override
-        public void actionPerformed(ActionEvent e) {
+        if (user.equals("admin") && password.equals("admin"))
+            JOptionPane.showMessageDialog(null, "Logged in as Admin successfully! ",
+                    "Logged In", JOptionPane.INFORMATION_MESSAGE);
 
-            /*** Text-field triggers the event ***/
-            if(e.getSource() == usernameField)
-            {
-                /*** Password field is next in line and prioritized ***/
-                passwordField.requestFocus();
-            }
+        else if (user.equals("member") && password.equals("member"))
+            JOptionPane.showMessageDialog(null, "Logged in as Member successfully! ",
+                    "Logged In", JOptionPane.INFORMATION_MESSAGE);
 
-            /*** Password field triggers the event handler ***/
-            if(e.getSource() == passwordField)
-            {
-                /*** The accessor getPassword() returns a char[] array ***/
-                char[] passwordCharacters = passwordField.getPassword();
-
-                /*** The char[] array os converted to a String ***/
-                String passwordText = new String(passwordCharacters);
-
-                /*** Validation takes place to in-sure both Member and Staff can securely login ***/
-                if(usernameField.getText().equals(usernameField) && passwordText.equals(passwordField))
-
-                    JOptionPane.showMessageDialog(null, "Welcome to the Gym Booking System " +
-                            usernameField.getText(), "Logged In", JOptionPane.INFORMATION_MESSAGE);
-
-                else
-                    JOptionPane.showMessageDialog(null, "An invalid combination was entered",
-                            "Try logging in", JOptionPane.INFORMATION_MESSAGE);
-            }
-
-        }
+        else
+            JOptionPane.showMessageDialog(null, "Not logged in... ",
+                    "Error Message", JOptionPane.ERROR_MESSAGE);
     }
 }
-
-
-
-
-
-
-
-
