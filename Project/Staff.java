@@ -1,8 +1,7 @@
 package Project;
 
 /***
- * Gym Booking System Mini-Project
- * Created on 15/11/2021
+ * Gym Booking System Mini-Project created on 15/11/2021
  * @author Steven Oprisan
  * @version 1.0
  */

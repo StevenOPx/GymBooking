@@ -3,6 +3,13 @@ package Project;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
+
+/***
+ * Gym Booking System Mini-Project created on 15/11/2021
+ * @author Steven Oprisan
+ * @version 1.0
+ */
 
 public class Login implements ActionListener {
 
@@ -23,8 +30,10 @@ public class Login implements ActionListener {
         JFrame frame = new JFrame();
         frame.add(panel);
         frame.setTitle("Login Page");
-        frame.setLocation(800,300);
+        //frame.setLocation(800,300);
+        frame.setLocationRelativeTo(null);
         frame.setSize(400,250);
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         panel.setLayout(null);
